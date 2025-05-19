@@ -99,6 +99,9 @@ To use the Spotify API, follow these steps:
 
 1. **Create a Spotify Developer Account**  
    - Go to [developer.spotify.com](https://developer.spotify.com/)
+    ⚠️ Note: as of 2024–2025, many users (especially student apps or public IPs) have reported that audio-features returns 403s unless your app is:
+	- Associated with an approved Spotify Partner
+	- Or has been explicitly authorized by Spotify’s internal team
    - Log in and create a new app
    - Copy your **Client ID** and **Client Secret**
 
@@ -127,6 +130,17 @@ And if you would like to input the features manually you can run this:
 ```python
 predict_mood_manual_input()
 ```
+
+⚠️ Note: The `predict_mood_manual_input()` function requires user input via the terminal.
+If you are running this in a Jupyter Notebook (especially in a browser or cloud environment), manual typing may not be supported.
+
+To use this function, we recommend exporting the notebook as a `.py` script and running it from a terminal:
+
+```bash
+jupyter nbconvert --to script project.ipynb
+python project.py
+```
+
 
 You will be prompted to enter values for features like danceability, energy, loudness, and encoded categories like key_C or time_signature_4/4. The model will return:
 - The predicted mood cluster
