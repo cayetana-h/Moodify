@@ -43,6 +43,6 @@ The goal is to bridge the gap between the **emotional experience of listening to
 Clone the repo and install dependencies:
 
 ```bash
-git clone https://github.com/your-username/spotify-mood-classifier.git
-cd spotify-mood-classifier
+git clone https://github.com/your-username/moodify.git
+cd moodify
 pip install -r requirements.txt
