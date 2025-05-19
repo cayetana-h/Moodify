@@ -34,7 +34,77 @@ The goal is to bridge the gap between the **emotional experience of listening to
    - Accuracy, macroF1, per-class F1, confusion matrices, and ROC 
    - Best performance from Random Forest (76.3% test accuracy)
 
-----
+---
+
+## Final Model
+
+The best-performing model was a **fine-tuned Random Forest classifier**, trained to predict mood clusters based on Spotify audio features.
+
+**Why Random Forest?**
+- Handles mixed data types (numerical & categorical)
+- Captures non-linear feature interactions
+- Resistant to overfitting, especially with imbalanced data (via SMOTE)
+
+**Best hyperparameters:**
+- `n_estimators = 120`
+- `max_depth = None`
+- `min_samples_split = 2`
+- `min_samples_leaf = 1`
+
+---
+
+## Training
+
+The model was trained on a dataset of 232,000+ tracks, with the following steps:
+
+- Unsupervised clustering on core audio features to define 5 pseudo-mood labels
+- One-hot encoding of categorical features
+- Standardized numerical features
+- Added interaction terms (e.g., `speechiness * tempo`)
+- Data split: **90% train**, **5% validation**, **5% test**
+- Applied **SMOTE** to balance class distribution in training
+- Hyperparameter tuning via **RandomizedSearchCV**
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+
+rf = RandomForestClassifier(
+    n_estimators=120,
+    max_depth=None,
+    min_samples_split=2,
+    min_samples_leaf=1,
+    random_state=42
+)
+rf.fit(X_train, y_train)
+```
+
+## Inference
+Once trained, the model can predict the mood of a new song using its audio features. Use cases include:
+- Auto-tagging music libraries by mood
+- Generating mood-based playlists
+- Recommending emotionally similar songs
+
+```python
+import pandas as pd
+
+# Sample song features (preprocessed as needed)
+song_features = pd.DataFrame([{
+    'danceability': 0.78,
+    'energy': 0.65,
+    'loudness': -5.2,
+    'speechiness': 0.04,
+    'tempo': 120,
+    'key_C': 0, 'key_D#': 1,  # one-hot encoded keys
+    'time_signature_4/4': 1,
+    # ... include all required engineered and aligned features
+}])
+
+# Predict mood
+predicted_mood = rf.predict(song_features)
+print("Predicted Mood:", predicted_mood)
+```
+Output:
+One of the 5 moods: Calm, Content, Energetic, Happy, or Mellow
 
 ## How to Run
 
@@ -44,3 +114,8 @@ Clone the repo and install dependencies:
 git clone https://github.com/your-username/moodify.git
 cd moodify
 pip install -r requirements.txt
+```
+Then open the notebook:
+```bash
+jupyter notebook project.ipynb
+```
