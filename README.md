@@ -86,7 +86,7 @@ This can be useful for:
 - Creating mood-based playlists or filters
 - Recommending emotionally similar songs
 
-We’ve included a built-in function at the end of the notebook that allows you to manually input audio features and receive a predicted mood.
+We’ve included a built-in function at the end of the notebook that allows you to automatically receive a predicted mood and manual one where you can input audio features and receive a predicted mood.
 
 ### Usage Example
 #### Integration with Spotify API
