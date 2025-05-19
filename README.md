@@ -1,7 +1,5 @@
 # Moodify
 
-# Spotify Mood Classification
-
 This project explores how machine learning can simulate human perception of music mood by analyzing audio features from over 230,000 Spotify tracks. Since the dataset contains no explicit mood labels, we generate them using unsupervised clustering, and then train supervised models to predict those moods from audio features.
 
 The goal is to bridge the gap between the **emotional experience of listening to music** and the **quantitative data** that a machine can understand.
