@@ -79,47 +79,35 @@ rf.fit(X_train, y_train)
 ```
 
 ## Inference
-Once trained, the model can predict the mood of a new song using its audio features. Use cases include:
+
+Once trained, the model can predict the mood of a new song using its audio features.  
+This can be useful for:
 - Auto-tagging music libraries by mood
-- Generating mood-based playlists
+- Creating mood-based playlists or filters
 - Recommending emotionally similar songs
 
+We’ve included a built-in function at the end of the notebook that allows you to manually input audio features and receive a predicted mood.
+
+### Usage Example
+
+After training and running all cells, simply run:
+
 ```python
-import pandas as pd
-
-# Sample song features (preprocessed as needed)
-song_features = pd.DataFrame([{
-    'danceability': 0.78,
-    'energy': 0.65,
-    'loudness': -5.2,
-    'speechiness': 0.04,
-    'tempo': 120,
-    'key_C': 0, 'key_D#': 1,  # one-hot encoded keys
-    'time_signature_4/4': 1,
-    # ... include all required engineered and aligned features
-}])
-
-# Predict mood
-predicted_mood = rf.predict(song_features)
-print("Predicted Mood:", predicted_mood)
-```
-Output:
-One of the 5 moods: Calm, Content, Energetic, Happy, or Mellow
-
-## How to Run
-
-Clone the repo and install dependencies:
-
-```bash
-git clone https://github.com/your-username/moodify.git
-cd moodify
-pip install -r requirements.txt
-```
-Then open the notebook:
-```bash
-jupyter notebook project.ipynb
+predict_mood_from_features()
 ```
 
+You will be prompted to enter values for features like danceability, energy, loudness, and encoded categories like key_C or time_signature_4/4. The model will return:
+- The predicted mood cluster
+- The probabilities for all classes
+
+Example Output:
+- Predicted Mood: Content
+- Class Probabilities:
+ - - Calm: 0.03
+ - - Content: 0.76
+ - - Energetic: 0.10
+ - - Happy: 0.06
+ - - Mellow: 0.05
 
 ## Acknowledgements
 - Audio features from Spotify Web API
