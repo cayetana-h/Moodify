@@ -89,11 +89,43 @@ This can be useful for:
 We’ve included a built-in function at the end of the notebook that allows you to manually input audio features and receive a predicted mood.
 
 ### Usage Example
+#### Integration with Spotify API
+
+You can connect Moodify to the **Spotify Web API** to automatically fetch the audio features of any song using its Spotify track ID or name.
+
+#### Get Audio Features from Spotify
+
+To use the Spotify API, follow these steps:
+
+1. **Create a Spotify Developer Account**  
+   - Go to [developer.spotify.com](https://developer.spotify.com/)
+   - Log in and create a new app
+   - Copy your **Client ID** and **Client Secret**
+
+2. **Install Spotipy**
+
+```bash
+pip install spotipy
+```
 
 After training and running all cells, simply run:
 
 ```python
-predict_mood_from_features()
+# fill in your Spotify credentials
+client_id = "YOUR_SPOTIFY_CLIENT_ID"
+client_secret = "YOUR_SPOTIFY_CLIENT_SECRET"
+
+# get the song features
+df = get_features_from_spotify("Blinding Lights", client_id, client_secret)
+
+# Predict mood using your model
+if df is not None:
+    predict_mood_from_df() 
+```
+
+And if you would like to input the features manually you can run this:
+```python
+predict_mood_manual_input()
 ```
 
 You will be prompted to enter values for features like danceability, energy, loudness, and encoded categories like key_C or time_signature_4/4. The model will return:
@@ -108,6 +140,7 @@ Example Output:
  - - Energetic: 0.10
  - - Happy: 0.06
  - - Mellow: 0.05
+ - A visual
 
 ## Acknowledgements
 - Audio features from Spotify Web API
