@@ -119,3 +119,10 @@ Then open the notebook:
 ```bash
 jupyter notebook project.ipynb
 ```
+
+
+## Acknowledgements
+- Audio features from Spotify Web API
+- Built with pandas, scikit-learn, xgboost, seaborn, and imbalanced-learn
+- Developed as part of a university machine learning project
+
